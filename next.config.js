@@ -12,6 +12,12 @@ const nextConfig = {
       ...config.experiments,
       topLevelAwait: true,
     };
+
+    // config.module.rules.push({
+    //   test: /\.node$/,
+    //   use: "binary-loader",
+    // });
+
     return config;
   },
 };
