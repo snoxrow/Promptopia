@@ -32,10 +32,10 @@ const Feed = () => {
     const fetchPosts = async () => {
       const res = await fetch(`/api/prompt?search=${searchText}`, {
         next: { revalidate: 10 },
-        method: "GET",
-        headers: {
-          "Cache-Control": "no-store",
-        },
+        // method: "GET",
+        // headers: {
+        //   "Cache-Control": "no-store",
+        // },
       });
       const data = await res.json();
 
