@@ -30,7 +30,7 @@ const Navbar = () => {
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">Promptopia</p>
+        <p className="orange_gradient font-satoshi text-lg font-semibold ">Promptopia</p>
       </Link>
 
       {/* {Desktop Navigation} */}
