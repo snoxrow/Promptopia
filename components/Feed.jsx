@@ -9,13 +9,13 @@ const PromptCardList = ({ data, handleTagClick }) => {
     <div className="mt-16 prompt_layout">
       {data.map((post) => {
         return (
-        <PromptCard
-          key={post._id}
-          post={post}
-          handleTagClick={handleTagClick}
-        />);
+          <PromptCard
+            key={post._id}
+            post={post}
+            handleTagClick={handleTagClick}
+          />
+        );
       })}
-      
     </div>
   );
 };
@@ -25,12 +25,13 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
 
   const handleSearchChange = (e) => {
-    setSearchText(e.target.value)
+    setSearchText(e.target.value);
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch(`/api/prompt?search=${searchText}`, {
+        next: { revalidate: 10 },
         method: "GET",
         headers: {
           "Cache-Control": "no-store",
@@ -39,7 +40,7 @@ const Feed = () => {
       const data = await res.json();
 
       setPosts(data);
-      console.log(data)
+      console.log(data);
     };
 
     console.log(posts);
