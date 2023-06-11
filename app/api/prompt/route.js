@@ -1,20 +1,40 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
+import User from "@models/user";
 
 export const GET = async (req) => {
   try {
+
+    // await connectToDB();
+
+    // const prompts = await Prompt.find({}).populate("creator");
+
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   'Cache-Control': 'no-store, no-cache, must-revalidate',
+    //   Expires: '0',
+    //   Pragma: 'no-cache',
+    // };
+
+    // return new Response(JSON.stringify(prompts), { status: 200, headers });
     await connectToDB();
+    const prompts = await Prompt.find().populate({
+      path: "creator"
+    });
 
-    const prompts = await Prompt.find({}).populate("creator");
+    const response = new Response(JSON.stringify(prompts), {
+      status: 200,
+    });
 
-    const headers = {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-store, no-cache, must-revalidate',
-      Expires: '0',
-      Pragma: 'no-cache',
-    };
+    // Add a unique identifier to the URL to force a cache-busting reload
+    // const url = new URL(request.url);
+    // url.searchParams.set("t", Date.now());
+    // response.headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    // response.headers.set("Pragma", "no-cache");
+    // response.headers.set("Expires", "0");
+    // response.headers.set("Location", url.toString());
 
-    return new Response(JSON.stringify(prompts), { status: 200, headers });
+    return response;
   } catch (error)  {
     return new Response("Failed to fetch prompts", { status: 500 });
   }

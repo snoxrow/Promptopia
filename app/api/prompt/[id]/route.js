@@ -52,7 +52,7 @@ export const DELETE = async (req, { params }) => {
   try {
     await connectToDB();
 
-    await Prompt.findOneAndRemove(params.id);
+    await Prompt.findByIdAndRemove(params.id);
 
     return new Response("Prompt successfully deleted!", { status: 200 });
   } catch (err) {

@@ -23,10 +23,11 @@ const MyProfile = () => {
 
       setPosts(data);
       
+      
     };
 
    if (session?.user.id) fetchPosts();
-  }, []);
+  }, [session?.user.id]);
 
   const handleDelete = async (post) => {
     const hasConfirmed = confirm("Are you sure you want to delete this prompt?")
@@ -34,14 +35,15 @@ const MyProfile = () => {
     if (hasConfirmed) {
       try {
         await fetch(`/api/prompt/${post._id.toString()}`, {
-          method: "Delete",
-        });
+          method: "DELETE",
+          });
 
-        const filteredPosts = posts.filter((p) => {
+        const filteredPosts = posts.filter((p) => 
           p._id !== post._id
-        })
+        )
 
         setPosts(filteredPosts);
+        
       } catch (err) {
         console.log(err)
       }
@@ -49,7 +51,7 @@ const MyProfile = () => {
 
   
 
-    // if (res.ok) router.push('/')
+    
 
   }
 

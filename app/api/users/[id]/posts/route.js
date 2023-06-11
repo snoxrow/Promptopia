@@ -6,7 +6,7 @@ export const GET = async (req, {params}) => {
     await connectToDB();
 
     const prompts = await Prompt.find({
-      creator: params.id
+      creator: params.id, 
     }).populate("creator");
 
     const headers = {
